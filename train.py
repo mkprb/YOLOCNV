@@ -12,8 +12,8 @@ from utility import AdjustedYoloLoss, MyDataset, resize, readable_stats, load_ch
 
 
 DEVICE = "cuda" if torch.cuda.is_available else "cpu"
-BATCH_SIZE = 50
-learning_rate = 0.0005 
+BATCH_SIZE = 32
+learning_rate = 0.00008
 weight_decay = 0.001
 
 model = Yolocnv().to(DEVICE)
@@ -28,10 +28,7 @@ test_loader = DataLoader(dataset=test_dataset, batch_size=BATCH_SIZE, shuffle=Tr
 stats_train = np.array([[0.,0.,0.,0.,0.,0.]])
 stats_test = np.array([[0.,0.,0.,0.,0.,0.]]) 
 
-tr, ts = training(1,8, l_under = 0.5, l_over = 0.5, l_coord = 2, trs = 0.3, run_train = True, run_tests = True)
-stats_train = np.append(stats_train, tr, axis = 0)
-stats_test = np.append(stats_test, ts, axis = 0)
-tr, ts = training(9,15, l_under = 0.4, l_over = 0.6, l_coord = 2, trs = 0.3, run_train = True, run_tests = True)
+tr, ts = training(1,20, l_under = 0.5, l_over = 0.5, l_coord = 2, trs = 0.3, run_train = True, run_tests = True)
 stats_train = np.append(stats_train, tr, axis = 0)
 stats_test = np.append(stats_test, ts, axis = 0)
 
